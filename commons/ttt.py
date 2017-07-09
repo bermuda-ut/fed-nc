@@ -1,7 +1,5 @@
 from client.noughtsandcrosses import InvalidMoveException
 
-import copy
-
 class TTT(object):
     class Board(object):
         BLANK = " "
