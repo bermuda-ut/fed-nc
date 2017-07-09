@@ -1,3 +1,4 @@
 *.o
 server
 *.swp
+__pycache__
