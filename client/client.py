@@ -34,8 +34,8 @@ def main():
 		print(error)
 	else:
 		print(b)
-		p[pi].update(move)
-		print("game over!")
+		ps[p].update(move)
+		print("game over! winner: {}".format(b.winner()))
 
 if __name__ == '__main__':
 	main()

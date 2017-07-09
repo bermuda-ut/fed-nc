@@ -26,9 +26,37 @@ class board:
 
 		# make the actual move
 		self.grid[i][j] = p
-		
+
 	def playing(self):
+		"""scan the board: True if game is still going, False otherwise"""
+		runofXs = [piece.X] * 3
+		runofOs = [piece.O] * 3
+
+		runs = self._runs()
+		for run in runs:
+			if run == runofXs or run == runofOs:
+				return False
 		return True
+	
+	def winner(self):
+		"""scan the board: True if game is still going, False otherwise"""
+		runofXs = [piece.X] * 3
+		runofOs = [piece.O] * 3
+
+		runs = self._runs()
+		for run in runs:
+			if run == runofXs:
+				return piece.X
+			elif run == runofOs:
+				return piece.O
+		return None
+
+	def _runs(self):
+		rows = [[self.grid[i][j] for j in range(3)] for i in range(3)]
+		cols = [[self.grid[i][j] for i in range(3)] for j in range(3)]
+		dags = [[self.grid[i][i]   for i in range(3)],
+				[self.grid[i][2-i] for i in range(3)]]
+		return rows + cols + dags
 
 class InvalidMoveException(Exception):
 	"""Raised due to an invalid move"""
