@@ -8,12 +8,6 @@
 #   LastChange: 2017-07-09 18:23:49
 =============================================================================*/
 #include "main.h"
-#include <iostream>
-
-using std::cout;
-using std::endl;
-
-//using namespace std;
 
 int main(int argc, char **argv) {
     (void) argv;
