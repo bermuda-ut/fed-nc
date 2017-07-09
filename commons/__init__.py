@@ -1,1 +1,1 @@
-all = ['AlphaBeta']
+__all__ = ['alpha_beta', 'ttt']
