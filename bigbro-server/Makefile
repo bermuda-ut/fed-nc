@@ -8,11 +8,11 @@
 #   LastChange: 2017-07-09 18:15:12
 #=============================================================================
 CC = g++
-CFLAGS = -Wall -Wextra -std=gnu99 -O3 #-g
+CFLAGS = -Wall -Wextra
 
 LIB = #-lm -pthread
-HDR = #main.h
-SRC = main.c
+HDR = main.h client.h server.h
+SRC = main.cc client.cc server.cc
 OBJ = $(SRC:.c=.o)
 
 EXE = server
