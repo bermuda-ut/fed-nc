@@ -23,22 +23,30 @@ class TTT(object):
             # check diagonals
             # \ diagonal
             diag1 = [self.brd[i*(self.size-1)+(self.size-1)] for i in range(self.size)]
-            if all_same(diag1):
+            if TTT.Board._all_same(diag1) and diag1[0] != TTT.Board.BLANK:
                 return diag1[0]
             # / diagonal
             diag2 = [self.brd[i*(self.size+1)] for i in range(self.size)]
-            if all_same(diag2):
+            if TTT.Board._all_same(diag2) and diag2[0] != TTT.Board.BLANK:
                 return diag2[0]
 
             # check rows and cols
             for i in range(self.size):
                 row = self.brd[i*self.size:(i+1)*self.size]
-                if all_same(row):
+                if TTT.Board._all_same(row) and row[0] != TTT.Board.BLANK:
                     return row[0]
                 col = [self.brd[i+(self.size*j)] for j in range(self.size)]
-                if all_same(col):
+                if TTT.Board._all_same(col) and col[0] != TTT.Board.BLANK:
                     return col[0]
             return None
+
+        @staticmethod
+        def _all_same(iterable):
+            for index, i in enumerate(iterable[:-1]):
+                if iterable[index+1] != i:
+                    return False
+            return True
+
 
         def __str__(self):
             out = ""
