@@ -8,10 +8,37 @@ class TTT(object):
             self.brd = [TTT.Board.BLANK]*(size*size)
 
         def update(self, move, piece):
+            """
+            updates the internal board in-place
+            """
             if self.brd[move-1] != TTT.Board.BLANK:
                 raise InvalidMoveException("Placing a piece on occupied position {} ".format(move) + \
                      "on board but piece {} already occupied position\n".format(self.brd[move-1]) + self.__str__())
             self.brd[move-1] = piece
+
+        def get_winner(self):
+            """
+            returns the winner's symbol, None otherwise
+            """
+            # check diagonals
+            # \ diagonal
+            diag1 = [self.brd[i*(self.size-1)+(self.size-1)] for i in range(self.size)]
+            if all_same(diag1):
+                return diag1[0]
+            # / diagonal
+            diag2 = [self.brd[i*(self.size+1)] for i in range(self.size)]
+            if all_same(diag2):
+                return diag2[0]
+
+            # check rows and cols
+            for i in range(self.size):
+                row = self.brd[i*self.size:(i+1)*self.size]
+                if all_same(row):
+                    return row[0]
+                col = [self.brd[i+(self.size*j)] for j in range(self.size)]
+                if all_same(col):
+                    return col[0]
+            return None
 
         def __str__(self):
             out = ""
@@ -30,13 +57,13 @@ class TTT(object):
         self.state = TTT.Board(size)
         self.piece = piece
 
-    def apply_action(self, action):
+    def update(self, action):
         """
-        apply action 'inplace' on the board itself
+        apply action *in-place* on the board itself
         """
         self.state.update(action, self.piece)
 
-    def apply_action_copy(self, action):
+    def apply_action(self, action):
         """
         returns the new board after action is applied on a copy of the current board,
         the current board is not changed
@@ -53,7 +80,8 @@ class TTT(object):
         return 1
 
     def is_terminal(self):
-        return False
+        return self.state.get_winner() != None
+
 
     def clone(self):
         """
