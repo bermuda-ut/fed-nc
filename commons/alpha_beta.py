@@ -11,9 +11,9 @@ class AlphaBeta(object):
         if len(possible_actions) == 0:
             return None
         v = self._max_move(state, float("-inf"), float("inf"), 0, max_depth_override)
-        for move in possible_actions:
-            if state.apply_action_copy(move).evaluate() == v:
-                return move
+        #for move in possible_actions:
+        #    if state.apply_action_copy(move).evaluate() == v:
+        #       return move
         raise Exception("Logic error, fatal")
 
     def _min_move(self, state, alpha, beta, depth, max_depth):
