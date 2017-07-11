@@ -1,1 +1,1 @@
-__all__ = ['alpha_beta', 'ttt']
+__all__ = ['alpha_beta']

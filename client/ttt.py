@@ -1,8 +1,65 @@
 from client.noughtsandcrosses import InvalidMoveException
 
 class TTT(object):
+    def __init__(self, size, piece):
+        """
+        Initializes the board with size = size * size (row x col) and indicates that
+        the first to move is player 'piece'
+        :param size: size of board
+        :param piece: which player starts first (x or o)
+        """
+        self.state = TTT.Board(size)
+        self.piece = piece
+
+    def update(self, action):
+        """
+        apply action *in-place* on the board itself
+        """
+        self.state.update(action, self._get_player_this_move())
+
+    def apply_action(self, action):
+        """
+        returns the new board after action is applied on a copy of the current board,
+        the current board is not changed
+        """
+        copy_ttt = self.clone()
+        copy_ttt.state.update(action, self._get_player_this_move())
+        return copy_ttt
+
+    def get_actions(self):
+        return [(index + 1) for index, pos in enumerate(self.state.brd) if pos == TTT.Board.BLANK]
+
+    def evaluate(self):
+        import random
+        return random.random()
+
+    def is_terminal(self):
+        return self.state.get_winner() != None
+
+
+    def clone(self):
+        """
+        returns a deep copy of this TTT state
+        """
+        # create a new copy of TTT
+        new_copy = TTT(self.state.size, self.piece)
+        # override the empty board
+        new_copy.state.brd = list(self.state.brd)
+        return new_copy
+
+    def _get_player_this_move(self):
+        """
+        returns who should make a move this round
+        defaults to the first player if number of pieces are even on the board
+        """
+        num_x = self.state.brd.count(TTT.Board.X)
+        num_o = self.state.brd.count(TTT.Board.O)
+        if num_x == num_o:
+            return self.piece.lower()
+        return TTT.Board.X if num_o > num_x else TTT.Board.O
+
     class Board(object):
-        BLANK = " "
+        BLANK, X, O = " ", "x", "o"
         def __init__(self, size):
             self.size = size
             self.brd = [TTT.Board.BLANK]*(size*size)
@@ -11,6 +68,8 @@ class TTT(object):
             """
             updates the internal board in-place
             """
+            if move == None:
+                return
             if self.brd[move-1] != TTT.Board.BLANK:
                 raise InvalidMoveException("Placing a piece on occupied position {} ".format(move) + \
                      "on board but piece {} already occupied position\n".format(self.brd[move-1]) + self.__str__())
@@ -60,43 +119,3 @@ class TTT(object):
 
         def __repr__(self):
             return self.__str__()
-
-    def __init__(self, size, piece):
-        self.state = TTT.Board(size)
-        self.piece = piece
-
-    def update(self, action):
-        """
-        apply action *in-place* on the board itself
-        """
-        self.state.update(action, self.piece)
-
-    def apply_action(self, action):
-        """
-        returns the new board after action is applied on a copy of the current board,
-        the current board is not changed
-        """
-
-        copy_ttt = self.clone()
-        copy_ttt.state.update(action, self.piece)
-        return copy_ttt
-
-    def get_actions(self):
-        return [(index + 1) for index, pos in enumerate(self.state.brd) if pos == TTT.Board.BLANK]
-
-    def evaluate(self):
-        return 1
-
-    def is_terminal(self):
-        return self.state.get_winner() != None
-
-
-    def clone(self):
-        """
-        returns a deep copy of this TTT state
-        """
-        # create a new copy of TTT
-        new_copy = TTT(self.state.size, self.piece)
-        # override the empty board
-        new_copy.state.brd = list(self.state.brd)
-        return new_copy
