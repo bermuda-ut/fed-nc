@@ -34,7 +34,7 @@ class TTT(object):
         return random.random()
 
     def is_terminal(self):
-        return self.state.get_winner() != None
+        return self.state.draw() or self.state.get_winner() != None
 
 
     def clone(self):
@@ -98,6 +98,12 @@ class TTT(object):
                 if TTT.Board._all_same(col) and col[0] != TTT.Board.BLANK:
                     return col[0]
             return None
+
+        def draw(self):
+            """
+            :returns: true if it's a draw game
+            """
+            return self.brd.count(TTT.Board.BLANK) == 0
 
         @staticmethod
         def _all_same(iterable):
