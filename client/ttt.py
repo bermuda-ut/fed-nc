@@ -81,11 +81,14 @@ class TTT(object):
             """
             # check diagonals
             # \ diagonal
-            diag1 = [self.brd[i*(self.size-1)+(self.size-1)] for i in range(self.size)]
+            all_diagonals = get_diagonals(self.board)
+            diag1 = all_diagonals[0]
+
             if TTT.Board._all_same(diag1) and diag1[0] != TTT.Board.BLANK:
                 return diag1[0]
+
             # / diagonal
-            diag2 = [self.brd[i*(self.size+1)] for i in range(self.size)]
+            diag2 = all_diagonals[1]
             if TTT.Board._all_same(diag2) and diag2[0] != TTT.Board.BLANK:
                 return diag2[0]
 
@@ -125,3 +128,35 @@ class TTT(object):
 
         def __repr__(self):
             return self.__str__()
+
+
+def foo(board, n, piece):
+    all_row_cols = get_row_cols(board)
+    all_diags = get_diagonals(board)
+    total = 0
+    for i in all_row_cols:
+        total += i.count(piece) == n
+
+    for diag in all_diags:
+        total += diag.count(piece) == n
+
+    return total
+
+def get_row_cols(board):
+    row_and_cols = []
+    size = board.size
+    brd = board.brd
+    for i in range(size):
+        row = brd[i*size:(i+1)*size]
+        row_and_cols.append(row)
+        col = [brd[i+(size*j)] for j in range(size)]
+        row_and_cols.append(col)
+    return row_and_cols
+
+
+def get_diagonals(board):
+    size = board.size
+    brd = board.brd
+    diag1 = [brd[i*(size-1)+(size-1)] for i in range(size)]
+    diag2 = [brd[i*(size+1)] for i in range(size)]
+    return [diag1, diag2]
