@@ -1,12 +1,13 @@
 from noughtsandcrosses import InvalidMoveException
 
 class TTT(object):
-    def __init__(self, size, piece):
+    def __init__(self, size, piece, evaluator):
         """
         Initializes the board with size = size * size (row x col) and indicates that
         the first to move is player 'piece'
         :param size: size of board
         :param piece: which player starts first (x or o)
+        :param evaluator: Evaluator class to be used for evaluating boards
         """
         self.state = TTT.Board(size)
         self.piece = piece.lower()
@@ -30,8 +31,7 @@ class TTT(object):
         return [(index + 1) for index, pos in enumerate(self.state.brd) if pos == TTT.Board.BLANK]
 
     def evaluate(self):
-        import random
-        return random.random()
+        self.evaluator.evaluate(self.board)
 
     def is_terminal(self):
         return self.state.draw() or self.state.get_winner() != None
