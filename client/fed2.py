@@ -10,6 +10,7 @@ import flip
 from ttt_eval import TutorialEvaluator
 from ttt import TTT
 from alpha_beta import AlphaBeta
+from config import START_PIECE
 
 class federatedplayer:
 	def __init__(self, p):	
@@ -18,8 +19,13 @@ class federatedplayer:
 
 		# create an evaluator with these weights, and an ai agent using it
 		evaluator = TutorialEvaluator(p, model)
-		self.board = TTT(3, p, evaluator)
-		self.agent = AlphaBeta(4)
+
+                # TTT's constructor takes in the piece
+                # that STARTS first (not the player's piece)
+		self.board = TTT(3, START_PIECE, evaluator)
+
+		# self.agent = AlphaBeta(4)
+		self.agent = AlphaBeta()
 
 	def update(self, move):
 		self._apply(move)

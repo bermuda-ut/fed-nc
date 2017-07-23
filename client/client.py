@@ -1,3 +1,4 @@
+from config import START_PIECE
 from noughtsandcrosses import board, piece, InvalidMoveException
 from human import humanplayer
 from fed2  import federatedplayer
@@ -13,7 +14,7 @@ def main():
 
 	move = None
 	error = None
-	p = piece.X
+	p = START_PIECE
 
 	print("begin!")
 	while b.playing():

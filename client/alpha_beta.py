@@ -1,5 +1,5 @@
 class AlphaBeta(object):
-    def __init__(self, max_depth):
+    def __init__(self, max_depth=float("inf")):
         """
         :param max_depth: max depth to use for all moves made by alpha beta
         """
