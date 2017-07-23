@@ -5,12 +5,12 @@
 #        Email: hoso1312@gmail.com
 #     HomePage: mallocsizeof.me
 #      Version: 0.0.1
-#   LastChange: 2017-07-09 19:18:45
-#      History:
+#   LastChange: 2017-07-16 18:18:20
 =============================================================================*/
 #pragma once
 
 #include "client.h"
+#include "logger.h"
 #include <vector>
 
 // server stuff
@@ -18,12 +18,21 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+typedef struct sockaddr_in SockAddr;
+
 using std::vector;
 
-class Server {
-    vector<Client> clients;
+class Server: public LoggableClass {
+    private:
+        vector<Client> clients;
+
+        int sockfd,
+            portNumber;
+
+        SockAddr serverAddr;
 
     public:
-    int some_shit;
+        Server(int portNumber);
+        int connectClient();
 };
 

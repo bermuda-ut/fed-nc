@@ -1,6 +1,6 @@
 #=============================================================================
 #     FileName: Makefile
-#         Desc: Makefile - based on Clement's
+#         Desc: Makefile - based on Clement's Makefile
 #       Author: Max Lee
 #        Email: hoso1312@gmail.com
 #     HomePage: mallocsizeof.me
@@ -8,11 +8,11 @@
 #   LastChange: 2017-07-09 18:15:12
 #=============================================================================
 CC = g++
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -std=c++11
 
 LIB = #-lm -pthread
-HDR = main.h client.h server.h
-SRC = main.cc client.cc server.cc
+HDR = logger.h	client.h	server.h	main.h	common.h
+SRC = logger.cc	client.cc	server.cc	main.cc
 OBJ = $(SRC:.cc=.o)
 
 EXE = server

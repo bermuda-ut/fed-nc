@@ -8,10 +8,11 @@
 #   LastChange: 2017-07-09 18:23:49
 =============================================================================*/
 #include "main.h"
+#include "server.h"
 
 int main(int argc, char **argv) {
     (void) argv;
     (void) argc;
-    cout << "hello world" << endl;
+    Server server(4242);
 }
 
