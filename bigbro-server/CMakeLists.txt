@@ -14,4 +14,7 @@ set(SOURCE_FILES
         server.cc
         server.h)
 
+find_package (Threads)
+
 add_executable(bigbro_server ${SOURCE_FILES})
+target_link_libraries( bigbro_server ${CMAKE_THREAD_LIBS_INIT} )

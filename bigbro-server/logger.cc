@@ -29,9 +29,16 @@ void LoggableClass::log(LogLevel level, string str) {
     time_t t = time(NULL);
     std::tm tm = *std::localtime(&t);;
 
-    if(level >= GLOBAL_LOG_LEVEL)
+    if (level >= GLOBAL_LOG_LEVEL)
         ((level == error) ? cerr : cout) <<
-            "[" << put_time(&tm, "%c") << "] "
-            << name << ": " << str << "\n";
+                                         "[" << put_time(&tm, "%c") << "] " <<
+                                         " " << logLevelToString(level) << "  " <<
+                                         name << ": " << str << "\n";
 }
 
+string LoggableClass::logLevelToString(LogLevel level) {
+    if (level == 0) return "DEBUG";
+    if (level == 1) return "INFO ";
+    if (level == 2) return "ERROR";
+    return "LOGGER";
+}

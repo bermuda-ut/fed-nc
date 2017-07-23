@@ -12,27 +12,33 @@
 #include "client.h"
 #include "logger.h"
 #include <vector>
+#include <thread>
 
 // server stuff
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+#define REQUEST_QUEUE_LEN 10
+
 typedef struct sockaddr_in SockAddr;
 
 using std::vector;
 
-class Server: public LoggableClass {
-    private:
-        vector<Client> clients;
+class Server : public LoggableClass {
+private:
+    vector<Client> clients;
 
-        int sockfd,
-            portNumber;
+    int sockfd, portNumber;
 
-        SockAddr serverAddr;
+    SockAddr serverAddr;
+    std::thread connector;
 
-    public:
-        Server(int portNumber);
-        int connectClient();
+    void acceptConnections();
+
+public:
+    explicit Server(int portNumber);
+
+    ~Server();
 };
 

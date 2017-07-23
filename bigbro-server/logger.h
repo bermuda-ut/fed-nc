@@ -16,15 +16,19 @@
 
 enum LogLevel {
     debug = 0,
-    info  = 1,
+    info = 1,
     error = 2
 };
 
 class LoggableClass {
-    private:
-        std::string name;
+private:
+    std::string name;
 
-    protected:
-        LoggableClass(std::string);
-        void log(LogLevel, std::string);
+protected:
+    explicit LoggableClass(std::string);
+
+    void log(LogLevel, std::string);
+
+private:
+    std::string logLevelToString(LogLevel);
 };
