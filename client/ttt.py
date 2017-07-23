@@ -131,6 +131,13 @@ class TTT(object):
 
 
 def foo(board, n, piece):
+    """
+    Return number of rows, columns, or diagonals with
+    n number of pieces
+    :param board: type TTT.Board
+    :param n: number of exact piecs required on the row, col or diag
+    :param piece: piece to count for on the row, col or diag
+    """
     all_row_cols = get_row_cols(board)
     all_diags = get_diagonals(board)
     total = 0
@@ -143,6 +150,9 @@ def foo(board, n, piece):
     return total
 
 def get_row_cols(board):
+    """
+    given a board, return all rows and columns in a nested list
+    """
     row_and_cols = []
     size = board.size
     brd = board.brd
@@ -155,6 +165,10 @@ def get_row_cols(board):
 
 
 def get_diagonals(board):
+    """
+    given a board, return both diagonals in a nested list with
+    the first element as diagional \ and second element as diagonal /
+    """
     size = board.size
     brd = board.brd
     diag1 = [brd[i*(size-1)+(size-1)] for i in range(size)]
