@@ -11,6 +11,7 @@ class TTT(object):
         """
         self.state = TTT.Board(size)
         self.piece = piece.lower()
+        self.evaluator = evaluator
 
     def update(self, action):
         """
@@ -31,7 +32,7 @@ class TTT(object):
         return [(index + 1) for index, pos in enumerate(self.state.brd) if pos == TTT.Board.BLANK]
 
     def evaluate(self):
-        self.evaluator.evaluate(self.board)
+        return self.evaluator.evaluate(self.state)
 
     def is_terminal(self):
         return self.state.draw() or self.state.get_winner() != None
@@ -42,7 +43,7 @@ class TTT(object):
         returns a deep copy of this TTT state
         """
         # create a new copy of TTT
-        new_copy = TTT(self.state.size, self.piece)
+        new_copy = TTT(self.state.size, self.piece, self.evaluator)
         # override the empty board
         new_copy.state.brd = list(self.state.brd)
         return new_copy
@@ -81,7 +82,7 @@ class TTT(object):
             """
             # check diagonals
             # \ diagonal
-            all_diagonals = get_diagonals(self.board)
+            all_diagonals = get_diagonals(self)
             diag1 = all_diagonals[0]
 
             if TTT.Board._all_same(diag1) and diag1[0] != TTT.Board.BLANK:
