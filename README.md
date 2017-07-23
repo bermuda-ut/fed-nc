@@ -1,6 +1,6 @@
-# Federated knots and crosses
+# Federated knaoughts (lol) and crosses
 
-Federated machine learning applied to the game of knots and crosses.
+Federated machine learning applied to the game of knaoughts and crosses.
 
 Early stage of development (literally just started.)  
 If you are curious about what we are doing, read through the papers B) #dealwithit  
