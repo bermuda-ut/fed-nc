@@ -18,6 +18,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <map>
 
 #define REQUEST_QUEUE_LEN 10
 
@@ -27,7 +28,7 @@ using std::vector;
 
 class Server : public LoggableClass {
 private:
-    vector<Client> clients;
+    std::map<int, Client*> clientsMap;
 
     int sockfd, portNumber;
 

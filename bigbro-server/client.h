@@ -10,7 +10,10 @@
 =============================================================================*/
 #pragma once
 
-class Client {
+#include "logger.h"
 
+class Client : LoggableClass {
+public:
+    Client(int);
 };
 

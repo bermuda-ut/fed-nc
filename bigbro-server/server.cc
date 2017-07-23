@@ -53,7 +53,7 @@ Server::Server(int portNumber) : LoggableClass("Server") {
         sleep(1);
     }
 
-    connector = thread([this] { this->acceptConnections(); });
+    connector = thread([=] { acceptConnections(); });
     log(info, "Successfully Instantiated with queue size " + std::to_string(REQUEST_QUEUE_LEN) + " port " +
               std::to_string(this->portNumber));
 }
@@ -67,9 +67,10 @@ void Server::acceptConnections() {
 
         shared_ptr<sockaddr_in> cli_addr = make_shared<sockaddr_in>();
         socklen_t clilen = sizeof(cli_addr);
+
         int newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
 
-        log(info, "Client connected");
+        this->clientsMap[newsockfd] = new Client(newsockfd);
     }
 #pragma clang diagnostic pop
 }
