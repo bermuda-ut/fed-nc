@@ -1,13 +1,14 @@
 from noughtsandcrosses import board, piece, InvalidMoveException
 from human import humanplayer
+from fed1  import federatedplayer
 
 def main():
 	b = board()
 	ps = {
-		piece.X: humanplayer(piece.X),
+		piece.X: federatedplayer(piece.X),
 		piece.O: humanplayer(piece.O)
 	}
-	print("player X: aiplayer")
+	print("player X: federatedplayer")
 	print("player O: humanplayer")
 
 	move = None

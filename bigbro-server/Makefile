@@ -13,7 +13,7 @@ CFLAGS = -Wall -Wextra
 LIB = #-lm -pthread
 HDR = main.h client.h server.h
 SRC = main.cc client.cc server.cc
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:.cc=.o)
 
 EXE = server
 
