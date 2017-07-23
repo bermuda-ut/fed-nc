@@ -10,6 +10,6 @@
 =============================================================================*/
 #include "client.h"
 
-Client::Client(int sockfd) : LoggableClass("Client" + std::to_string(sockfd)) {
+Client::Client(int sockfd) : LoggableClass("Client " + std::to_string(sockfd)) {
     log(info, "connected");
 }
