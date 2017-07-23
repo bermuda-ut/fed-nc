@@ -1,3 +1,8 @@
+"""
+connects to server, gets an updated model, then plans a normal human-controlled
+game anyway
+"""
+
 from noughtsandcrosses import piece
 import flip
 

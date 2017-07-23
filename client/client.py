@@ -1,6 +1,6 @@
 from noughtsandcrosses import board, piece, InvalidMoveException
 from human import humanplayer
-from fed1  import federatedplayer
+from fed2  import federatedplayer
 
 def main():
 	b = board()

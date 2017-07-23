@@ -1,4 +1,4 @@
-from client.noughtsandcrosses import InvalidMoveException
+from noughtsandcrosses import InvalidMoveException
 
 class TTT(object):
     def __init__(self, size, piece):
@@ -9,7 +9,7 @@ class TTT(object):
         :param piece: which player starts first (x or o)
         """
         self.state = TTT.Board(size)
-        self.piece = piece
+        self.piece = piece.lower()
 
     def update(self, action):
         """
@@ -55,7 +55,7 @@ class TTT(object):
         num_x = self.state.brd.count(TTT.Board.X)
         num_o = self.state.brd.count(TTT.Board.O)
         if num_x == num_o:
-            return self.piece.lower()
+            return self.piece
         return TTT.Board.X if num_o > num_x else TTT.Board.O
 
     class Board(object):
