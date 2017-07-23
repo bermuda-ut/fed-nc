@@ -130,25 +130,6 @@ class TTT(object):
             return self.__str__()
 
 
-def foo(board, n, piece):
-    """
-    Return number of rows, columns, or diagonals with
-    n number of pieces
-    :param board: type TTT.Board
-    :param n: number of exact piecs required on the row, col or diag
-    :param piece: piece to count for on the row, col or diag
-    """
-    all_row_cols = get_row_cols(board)
-    all_diags = get_diagonals(board)
-    total = 0
-    for i in all_row_cols:
-        total += i.count(piece) == n
-
-    for diag in all_diags:
-        total += diag.count(piece) == n
-
-    return total
-
 def get_row_cols(board):
     """
     given a board, return all rows and columns in a nested list
